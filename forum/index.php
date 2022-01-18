@@ -35,8 +35,8 @@ else
 		//prepare the table
 		echo '<table border="1">
 			  <tr>
-				<th>Category</th>
-				<th>Last topic</th>
+				<th>CATEGORY</th>
+				<th>LAST TOPIC</th>
 			  </tr>';	
 			
 		while($row = mysqli_fetch_assoc($result))

@@ -15,7 +15,7 @@
 
 		<div class="intro-box">
 
-			<h1 class="intro-text">owasp forum</h1>
+			<h1 class="intro-text">owAsp forum</h1>
 			<div class="nav-left">
 				<svg class="navi-home" xmlns="http://www.w3.org/2000/svg" viewBox="-2 -1.5 24 24" width="40" fill="currentColor" onclick="location.href='/SS/forum/index.php'">
 					<path d="M13 20.565v-5a3 3 0 0 0-6 0v5H2a2 2 0 0 1-2-2V7.697a2 2 0 0 1 .971-1.715l8-4.8a2 2 0 0 1 2.058 0l8 4.8A2 2 0 0 1 20 7.697v10.868a2 2 0 0 1-2 2h-5z">
