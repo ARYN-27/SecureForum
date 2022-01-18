@@ -4,7 +4,10 @@
 - Login
   - Duplicate username not allowed ✔
   - Duplicate password not allowed ✔
-  - Duplicate email not allowed ✔
+  - Email
+    - Duplicate email not allowed ✔
+    - Email Sanitized ✔
+    - Email Validated ✔
 
 ## 2. Output Encoding ❌
 
