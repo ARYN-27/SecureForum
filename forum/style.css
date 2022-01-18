@@ -29,7 +29,7 @@ body {
   justify-content: space-evenly;
   align-items: center;
   flex-wrap: nowrap;
-  gap: 84%;
+  gap: 79%;
   /* width: 94vw; */
   align-content: center;
   padding-top: 2px;
@@ -167,7 +167,8 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  border-image: linear-gradient(135deg, #2afadf 10%, #4c83ff 100%) 1;
+  border-image: linear-gradient(118deg, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%) 1;
+
 }
 
 /* begin table styles */

@@ -44,6 +44,20 @@ if ($_SESSION['signed_in'] == false | $_SESSION['user_level'] != 1) {
             $errors[] = '<br><font style="font-size: 18px;">The password field cannot be empty.</font><br><br>';
         }
 
+        if (isset($_POST['user_email'])) {
+
+            if (filter_var($_POST['user_email'], FILTER_VALIDATE_EMAIL)) { //email sanitization
+                if (!filter_var($_POST['user_email'], FILTER_VALIDATE_EMAIL)) {  //email validation 
+                    $errors[] = '<br><font style="font-size: 18px;">The email is not valid.</font><br><br>';
+                }
+            } else {
+                echo " No validation failed ";
+            }
+        } else {
+            $errors[] = '<br><font style="font-size: 18px;">This email field cannot be empty.</font><br><br>';
+        }
+
+
         if (!empty($errors)) /*check for an empty array, if there are errors, they're in this array (note the ! operator)*/ {
             echo '<br><font style="font-size: 18px;">Uh-oh.. a couple of fields are not filled in correctly..</font><br><br>';
             echo '<ul>';
