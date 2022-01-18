@@ -66,7 +66,9 @@ else
 	}
 	else
 	{
-	
+		if (empty($_POST['topic_subject']) ||empty($_POST['post_content']) ) {
+			echo '<br><font style="font-size: 14px;">Topic Subject/Post Content cannot be empty ' . '</font><br><br>';
+		} else {
 			$sql = "INSERT INTO 
 						topics(topic_subject,
 							   topic_date,
@@ -82,7 +84,7 @@ else
 			if(!$result)
 			{
 				//something went wrong, display the error
-				echo '<br><font style="font-size: 14px;">An error occured while inserting your data. Please try again later.</font><br><font style="font-size: 14px;">' . mysql_error() . '</font><br>';
+				echo '<br><font style="font-size: 14px;">An error occured while inserting your data. Please try again later.</font><br><font style="font-size: 14px;">' . '</font><br>';
 			}
 			else
 			{
@@ -117,7 +119,7 @@ else
 				if(!$result)
 				{
 					//something went wrong, display the error
-					echo '<br><font style="font-size: 14px;">An error occured while inserting your post. Please try again later.</font><br><font style="font-size: 14px;">' . mysql_error() . '</font><br>';
+					echo '<br><font style="font-size: 14px;">An error occured while inserting your post. Please try again later.</font><br><font style="font-size: 14px;">' .  '</font><br>';
 				}
 				else
 				{	
@@ -125,6 +127,8 @@ else
 					echo '<br><font style="font-size: 14px;">You have succesfully created <a href="topic.php?id='. $topicid . '">your new topic</a>.</font><br><br>';
 				}
 			}
+			
+		}	
 
 	}
 }

@@ -16,7 +16,7 @@ $result = mysqli_query($connect_database, $sql);
 
 if(!$result)
 {
-	echo '<br><font style="font-size: 14px;">The category could not be displayed, please try again later.</font><br><font style="font-size: 14px;">' . mysql_error() . '</font><br>';
+	echo '<br><font style="font-size: 14px;">The category could not be displayed, please try again later.</font><br><font style="font-size: 14px;">' .  '</font><br>';
 }
 else
 {

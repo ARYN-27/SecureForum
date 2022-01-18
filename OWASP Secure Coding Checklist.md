@@ -9,8 +9,11 @@
     - Email Sanitized ✔
     - Email Validated ✔
   - Category 
-    - Empty Category Name not allowed ✔
-    - Empty Category Description not allowed ✔
+    - Empty Category Name and Category Description not allowed ✔
+  - Topic 
+    - Empty Topic Subject and Post Content not allowed ✔
+  - Reply 
+    - Empty Reply not allowed ✔
 
 ## 2. Output Encoding ❌
 

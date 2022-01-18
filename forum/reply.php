@@ -17,27 +17,32 @@ else
 	}
 	else
 	{
-		//a real user posted a real reply
-		$sql = "INSERT INTO 
-					posts(post_content,
-						  post_date,
-						  post_topic,
-						  post_by) 
-				VALUES ('" . addslashes($_POST['reply-content']) . "',
-						NOW(),
-						" . $_GET['id'] . ",
-						" . $_SESSION['user_id'] . ")";
-						
-		$result = mysqli_query($connect_database, $sql);
-						
-		if(!$result)
-		{
-			echo '<br><font style="font-size: 14px;">Your reply has not been saved, please try again later.</font><br><br>';
+		if (empty($_POST['post_content'])) {
+			echo '<br><font style="font-size: 14px;">Reply cannot be empty ' . '</font><br><br>';
+		} else {
+			//a real user posted a real reply
+			$sql = "INSERT INTO 
+						posts(post_content,
+							post_date,
+							post_topic,
+							post_by) 
+					VALUES ('" . addslashes($_POST['reply-content']) . "',
+							NOW(),
+							" . $_GET['id'] . ",
+							" . $_SESSION['user_id'] . ")";
+							
+			$result = mysqli_query($connect_database, $sql);
+							
+			if(!$result)
+			{
+				echo '<br><font style="font-size: 14px;">Your reply has not been saved, please try again later.</font><br><br>';
+			}
+			else
+			{
+				echo '<br><font style="font-size: 14px;">Your reply has been saved, check out <a href="topic.php?id=' . $_GET['id'] . '">the topic</a>.</font><br><br>';
+			}
 		}
-		else
-		{
-			echo '<br><font style="font-size: 14px;">Your reply has been saved, check out <a href="topic.php?id=' . $_GET['id'] . '">the topic</a>.</font><br><br>';
-		}
+		
 	}
 }
 
