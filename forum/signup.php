@@ -70,7 +70,7 @@ else
 		$sql = "INSERT INTO
 					users(user_name, user_pass, user_email ,user_date, user_level)
 				VALUES('" . $_POST['user_name'] . "',
-					   '" . sha1($_POST['user_pass']) . "',
+					   '" . hash('sha256', $_POST['user_pass']) . "',
 					   '" . $_POST['user_email'] . "',
 						NOW(),
 						0)";
