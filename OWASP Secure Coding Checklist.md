@@ -8,6 +8,9 @@
     - Duplicate email not allowed ✔
     - Email Sanitized ✔
     - Email Validated ✔
+  - Category 
+    - Empty Category Name not allowed ✔
+    - Empty Category Description not allowed ✔
 
 ## 2. Output Encoding ❌
 

@@ -44,7 +44,7 @@ if ($_SESSION['signed_in'] == false | $_SESSION['user_level'] != 1) {
             $errors[] = '<br><font style="font-size: 18px;">The password field cannot be empty.</font><br><br>';
         }
 
-
+        //email validation
         if (isset($_POST['user_email'])) {
             if (!filter_var($_POST['user_email'], FILTER_SANITIZE_EMAIL)) { //email sanitization
                 if (!filter_var($_POST['user_email'], FILTER_VALIDATE_EMAIL)) {  //email validation  //HTML Required is acting as the first gate
@@ -57,22 +57,6 @@ if ($_SESSION['signed_in'] == false | $_SESSION['user_level'] != 1) {
             $errors[] = '<br><font style="font-size: 18px;">This email field cannot be empty.</font><br><br>';
         }
 
-
-        /*
-            if (isset($_POST['user_email'])) {
-        
-                    if (!filter_var($_POST['user_email'], FILTER_VALIDATE_EMAIL)) {  //email validation 
-                        $errors[] = '<br><font style="font-size: 18px;">The email is not valid.</font><br><br>';
-                    }
-                    else {
-                    }
-                 
-            } else {
-                $errors[] = '<br><font style="font-size: 18px;">This email field cannot be empty.</font><br><br>';
-            }
-        */
-
-
         if (!empty($errors)) /*check for an empty array, if there are errors, they're in this array (note the ! operator)*/ {
             echo '<br><font style="font-size: 18px;">Uh-oh.. a couple of fields are not filled in correctly..</font><br><br>';
             echo '<ul>';
@@ -81,9 +65,6 @@ if ($_SESSION['signed_in'] == false | $_SESSION['user_level'] != 1) {
             }
             echo '</ul>';
         } else {
-            //the form has been posted without, so save it
-            //notice the use of mysql_real_escape_string, keep everything safe!
-            //also notice the sha1 function which hashes the password
             $sql = "INSERT INTO
 					users(user_name, user_pass, user_email ,user_date, user_level)
 				VALUES('" . $_POST['user_name'] . "', '" . hash('sha256', $_POST['user_pass']) . "', '" . $_POST['user_email'] . "', NOW(), 1)";
