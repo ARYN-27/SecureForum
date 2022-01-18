@@ -18,8 +18,6 @@ if ($_SESSION['signed_in'] == false | $_SESSION['user_level'] != 1) {
 		 </form>';
 	} else {
 		//the form has been posted, so save it
-
-
 		if (empty($_POST['cat_name']) || empty($_POST['cat_description'])) {
 			echo '<br><font style="font-size: 14px;">Category Name/Category Descripion cannot be empty ' . '</font><br><br>';
 		} else {

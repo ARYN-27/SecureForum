@@ -19,7 +19,7 @@ $sql = "SELECT
 
 $result = mysqli_query($connect_database, $sql);
 
-
+//echo 'Current PHP version: ' . phpversion();
 if(!$result)
 {
 	echo '<br><font style="font-size: 14px;">The categories could not be displayed, please try again later.</font><br><br>';

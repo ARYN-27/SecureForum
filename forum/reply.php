@@ -17,7 +17,8 @@ else
 	}
 	else
 	{
-		if (empty($_POST['post_content'])) {
+		
+		if (empty($_POST['reply-content'])) {
 			echo '<br><font style="font-size: 14px;">Reply cannot be empty ' . '</font><br><br>';
 		} else {
 			//a real user posted a real reply
@@ -37,11 +38,17 @@ else
 			{
 				echo '<br><font style="font-size: 14px;">Your reply has not been saved, please try again later.</font><br><br>';
 			}
+			/*
+				if ($_POST['reply-content'] == "%00" ) {
+					echo '<br><font style="font-size: 14px;">Error: Null Byte detected ' . '</font><br><br>';
+				}
+			*/
 			else
 			{
 				echo '<br><font style="font-size: 14px;">Your reply has been saved, check out <a href="topic.php?id=' . $_GET['id'] . '">the topic</a>.</font><br><br>';
 			}
 		}
+		
 		
 	}
 }
