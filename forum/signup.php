@@ -69,18 +69,14 @@ else
 		//also notice the sha1 function which hashes the password
 		$sql = "INSERT INTO
 					users(user_name, user_pass, user_email ,user_date, user_level)
-				VALUES('" . $_POST['user_name'] . "',
-					   '" . hash('sha256', $_POST['user_pass']) . "',
-					   '" . $_POST['user_email'] . "',
-						NOW(),
-						0)";
+				VALUES('" . $_POST['user_name'] . "', '" . hash('sha256', $_POST['user_pass']) . "', '" . $_POST['user_email'] . "', NOW(), 0)";
 						
 		$result = mysqli_query($connect_database, $sql);
 		if(!$result)
 		{
 			//something went wrong, display the error
-			echo 'Something went wrong while registering. Please try again later.';
-			//echo mysql_error(); //debugging purposes, uncomment when needed
+			echo 'We are unable to register your account. Please try again later.';
+			//echo mysql_error(); //debugging, uncomment when needed
 		}
 		else
 		{
