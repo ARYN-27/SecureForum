@@ -18,7 +18,8 @@
 ## 4. Session Management ❌
 
 ## 5. Access Control ✔
-- Create Categories [create_cat.php] restricted to admin
+- Create Categories [create_cat.php] restricted to admin [*for moderation*]
+- Create Admin [signup_admin.php] restricted to admin
   - > Restrict access to protected URLs to only authorized users 
 
 ## 6. Cryptographic Practices ❌

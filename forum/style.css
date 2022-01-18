@@ -89,7 +89,7 @@ body {
   padding-bottom: 2%;
   padding-left: 2%;
   padding-right: 2%;
-  gap: 17%;
+  gap: 12%;
   flex-wrap: nowrap;
 }
 
@@ -237,7 +237,7 @@ font {
   line-height: 24px;
   min-width: 140px;
   outline: 0;
-  padding: 0 17px;
+  padding: 0 9px;
   text-align: center;
   text-decoration: none;
   transition: all 0.3s;
@@ -273,92 +273,6 @@ font {
 /**
   item2
 */
-
-#item2 {
-  font-family: "Major Mono Display", monospace;
-  align-items: center;
-  background-color: #fff;
-  border: 1px solid #000;
-  box-sizing: border-box;
-  color: #000;
-  cursor: pointer;
-  display: inline-flex;
-  fill: #000;
-  font-size: 12px;
-  font-weight: 200;
-  height: 23px;
-  justify-content: center;
-  letter-spacing: -0.8px;
-  line-height: 24px;
-  min-width: 140px;
-  outline: 0;
-  padding: 0 17px;
-  text-align: center;
-  text-decoration: none;
-  transition: all 0.3s;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-}
-
-#item2:focus {
-  color: #171e29;
-}
-
-#item2:hover {
-  border-color: #06f;
-  color: #06f;
-  fill: #06f;
-}
-
-@media (min-width: 768px) {
-  .button-59 {
-    min-width: 170px;
-  }
-}
-
-.login-text {
-  border: 2px solid #171e29;
-}
-
-.login-text::selection {
-  color: #06f;
-}
-
-/**
-  
-  ==============================
-*/
-.leftpart {
-  width: 70%;
-}
-
-.rightpart {
-  width: 30%;
-}
-
-.small {
-  font-size: 75%;
-  color: #373737;
-}
-#footer {
-  font-size: 65%;
-  padding: 3px 0 0 0;
-}
-
-.topic-post {
-  height: 100px;
-  overflow: auto;
-}
-
-.post-content {
-  padding: 30px;
-}
-
-.forum-text {
-  font-family: "Major Mono Display", monospace;
-  font-size: 14px;
-}
 
 .item2 {
   font-family: "Source Code Pro", monospace;
@@ -403,3 +317,48 @@ font {
     min-width: 170px;
   }
 }
+
+
+.login-text {
+  border: 2px solid #171e29;
+}
+
+.login-text::selection {
+  color: #06f;
+}
+
+/**
+  
+  ==============================
+*/
+.leftpart {
+  width: 70%;
+}
+
+.rightpart {
+  width: 30%;
+}
+
+.small {
+  font-size: 75%;
+  color: #373737;
+}
+#footer {
+  font-size: 65%;
+  padding: 3px 0 0 0;
+}
+
+.topic-post {
+  height: 100px;
+  overflow: auto;
+}
+
+.post-content {
+  padding: 30px;
+}
+
+.forum-text {
+  font-family: "Major Mono Display", monospace;
+  font-size: 14px;
+}
+

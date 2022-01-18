@@ -24,7 +24,7 @@
 			</div>
 
 		</div>
-		
+
 		<div class="container">
 			<div id="wrapper">
 				<div id="menu">
@@ -35,6 +35,9 @@
 						if (isset($_SESSION['signed_in']) and $_SESSION['signed_in'] == True) {
 							echo '<a id="item" href="create_topic.php">create topic</a>  ';
 							echo '<a id="item" href="create_cat.php">create category</a>';
+							if ($_SESSION['user_level'] != 0) {
+								echo '<a id="item" href="signup_admin.php">register admin account</a>';
+							}
 						} else {
 						}
 						?>
@@ -42,11 +45,17 @@
 
 					<div class="menu-right">
 						<?php
+						
 						if (isset($_SESSION['signed_in']) and $_SESSION['signed_in'] == True) {
 
 							echo '<div class="logged-user">welcome, ' . $_SESSION['user_name'] . '</div>' . '</b> <a id="item" href="signout.php">sign out</a>';
-						} else {
-							echo '<a id="item" href="signin.php">sign in</a> <a id="item" href="signup.php">create account</a>';
+							
+						} 
+						else {
+							 
+							echo '<a id="item" href="signin.php">sign in</a> <a id="item" href="signup.php">create account</a> ';
+							
+
 						}
 						?>
 					</div>
