@@ -19,7 +19,6 @@
 > Validate for expected data types 
 > If any potentially hazardous characters must be allowed as input, be sure that you implement additional controls like output encoding, secure task specific APIs and accounting for the utilization of that data throughout the application . Examples of common hazardous characters include: < > " ' % ( ) & + \ \' \" 
 > Check for null bytes (%00) Current Version (8.0.11) not vulnerable to CVE-2006-7243
-> 
 
 
 ## 2. Output Encoding ❌

@@ -29,6 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 	} else {
 		$errors = array(); /* declare the array for later use */
 
+		//username validation
 		if (isset($_POST['user_name'])) {
 			//the user name exists
 			if (!ctype_alnum($_POST['user_name'])) {
@@ -41,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 			$errors[] = '<br><font style="font-size: 18px;">The username field must not be empty.</font><br><br>';
 		}
 
-
+		//password validation
 		if (isset($_POST['user_pass'])) {
 			if ($_POST['user_pass'] != $_POST['user_pass_check']) {
 				$errors[] = '<br><font style="font-size: 18px;">The two passwords did not match.</font><br><br>';
@@ -50,6 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 			$errors[] = '<br><font style="font-size: 18px;">The password field cannot be empty.</font><br><br>';
 		}
 
+		//email validation
 		if (isset($_POST['user_email'])) {
 			if (!filter_var($_POST['user_email'], FILTER_SANITIZE_EMAIL)) { //email sanitization
 				if (!filter_var($_POST['user_email'], FILTER_VALIDATE_EMAIL)) {  //email validation  //HTML Required is acting as the first gate
@@ -62,6 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 			$errors[] = '<br><font style="font-size: 18px;">This email field cannot be empty.</font><br><br>';
 		}
 
+		//empty input invalidation
 		if (!empty($errors)) /*check for an empty array, if there are errors, they're in this array (note the ! operator)*/ {
 			echo '<br><font style="font-size: 18px;">Uh-oh.. a couple of fields are not filled in correctly..</font><br><br>';
 			echo '<ul>';
