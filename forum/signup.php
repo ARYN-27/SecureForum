@@ -79,9 +79,9 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 
 			$result = mysqli_query($connect_database, $sql);
 			if (!$result) {
-				//something went wrong, display the error
+				
 				echo 'We are unable to register your account. Please try again later.';
-				//echo mysql_error(); //debugging, uncomment when needed
+				//echo mysql_error(); 
 			} else {
 				echo '<br><font style="font-size: 18px;">Succesfully registered. You can now <a href="signin.php">sign in</a> and start posting! :-)</font><br><br>';
 			}

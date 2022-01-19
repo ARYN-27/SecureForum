@@ -27,7 +27,7 @@ if ($_SESSION['signed_in'] == false | $_SESSION['user_level'] != 1) {
 			$result = mysqli_query($connect_database, $sql);
 			if (!$result) {
 				//something went wrong, display the error
-				//echo '<br><font style="font-size: 14px;">Error: ' . mysql_error() . '</font><br><br>';
+				
 				echo '<br><font style="font-size: 14px;">Error: ' . '</font><br><br>';
 			} else {
 				echo '<br><font style="font-size: 14px;">New category succesfully added.</font><br><br>';
