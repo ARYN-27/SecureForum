@@ -44,7 +44,7 @@ if ($_SESSION['signed_in'] == false | $_SESSION['user_level'] != 1) {
                 $errors[] = '<br><font style="font-size: 18px;">The username field must not be empty.</font><br><br>';
             }
 
-
+            //password check
             if (isset($_POST['user_pass'])) {
                 if ($_POST['user_pass'] != $_POST['user_pass_check']) {
                     $errors[] = '<br><font style="font-size: 18px;">The two passwords did not match.</font><br><br>';
@@ -59,7 +59,7 @@ if ($_SESSION['signed_in'] == false | $_SESSION['user_level'] != 1) {
                     if (!filter_var($_POST['user_email'], FILTER_VALIDATE_EMAIL)) {  //email validation  //HTML Required is acting as the first gate
                         $errors[] = '<br><font style="font-size: 18px;">The email is not valid.</font><br><br>';
                     } else {
-                        //echo " No validation failed ";
+                        //echo "No validation failed ";
                     }
                 }
             } else {
