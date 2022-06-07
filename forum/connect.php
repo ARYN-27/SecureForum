@@ -1,6 +1,6 @@
 <?PHP
 $server	    = 'localhost';
 $username	= 'genesis';
-$password	= 'X[vUCTg]O4[82J9e';
+$password	= 'genesis';
 $database	= 'forum_v2';
 ?>
