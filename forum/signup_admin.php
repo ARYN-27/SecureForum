@@ -22,14 +22,12 @@ if ($_SESSION['signed_in'] == false | $_SESSION['user_level'] != 1) {
     } else {
 
 
-        $uppercase = preg_match('@[A-Z]@', $_POST['user_pass']);
-        $lowercase = preg_match('@[a-z]@', $_POST['user_pass']);
-        $number    = preg_match('@[0-9]@', $_POST['user_pass']);
-        $specialChars = preg_match('@[^\w]@', $_POST['user_pass']);
+        //$uppercase = preg_match('@[A-Z]@', $_POST['user_pass']);
+        //$lowercase = preg_match('@[a-z]@', $_POST['user_pass']);
+        //$number    = preg_match('@[0-9]@', $_POST['user_pass']);
+        //$specialChars = preg_match('/[\'\/~`\!@#\$%\^&\*\(\)_\-\+=\{\}\[\]\|;:"\<\>,\.\?\\\]/', $_POST['user_pass']);
 
-        
-
-        if (!$uppercase && !$lowercase && !$number && !$specialChars && strlen($password) < 8) {
+        if (!preg_match("#.*^(?=.{8,20})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$#", $_POST['user_pass'])) {
             echo '<br><font style="font-size: 18px;">Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.</font><br><br>';
         } else {
             $errors = array(); /* declare the array for later use */
