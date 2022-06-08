@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 	$number    = preg_match('@[0-9]@', $_POST['user_pass']);
 	$specialChars = preg_match('@[^\w]@', $_POST['user_pass']);
 
-	if (!$uppercase || !$lowercase || !$number || !$specialChars || strlen($password) < 8) {
+	if (!preg_match("#.*^(?=.{8,20})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$#", $_POST['user_pass'])) {
 		echo '<br><font style="font-size: 18px;">Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.</font><br><br>';
 	} else {
 		$errors = array(); /* declare the array for later use */
@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 			//the form has been posted without, so save it
 			//notice the use of mysql_real_escape_string, keep everything safe!
 			//also notice the sha1 function which hashes the password
-			$sql = "INSERT INTO
+			/**$sql = "INSERT INTO
 					users(user_name, user_pass, user_email ,user_date, user_level)
 				VALUES('" . $_POST['user_name'] . "', '" . hash('sha256', $_POST['user_pass']) . "', '" . $_POST['user_email'] . "', NOW(), 0)";
 
@@ -87,7 +87,34 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 				//echo mysql_error(); 
 			} else {
 				echo '<br><font style="font-size: 18px;">Succesfully registered. You can now <a href="signin.php">sign in</a> and start posting! :-)</font><br><br>';
+			}*/
+
+			$stmt = $conn->prepare('insert into users(user_name, user_pass,user_email, user_level) values(:user_name, :user_pass, :user_email, 0)');
+			$stmt->bindValue('user_name', $_POST['user_name']);
+			$stmt->bindValue('user_email', $_POST['user_email']);
+			$stmt->bindValue('user_pass', password_hash($_POST['user_pass'], PASSWORD_BCRYPT));
+			//$stmt->bindValue('fullName', $_POST['fullName']);
+			//$status=$stmt->execute();
+			
+			try{
+				$status=$stmt->execute();
+
+				if (!$status) {
+					//something went wrong, display the error0 
+					//echo 'We are unable to register your account. Please try again later.';
+					//echo mysql_error(); //debugging, uncomment when needed
+				} else {
+					//catch test
+					
+					echo '<br><font style="font-size: 18px;">Succesfully registered. You can now <a href="signin.php">sign in</a> and start posting! :-)</font><br><br>';
+				}
+
 			}
+			catch (exception $e) {
+				echo 'We are unable to register your account. Please try again later.';
+			}
+
+
 		}
 	}
 }
