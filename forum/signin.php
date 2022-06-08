@@ -48,7 +48,7 @@ if (isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true) {
 					WHERE
 						user_name = '" . $_POST['user_name'] . "'
 					AND
-						user_pass = '" . hash('sha256', $_POST['user_pass']) . "'";
+						user_pass = '" . password_verify($_POST['user_pass'], $user_pass) . "'";
 
 			$result = mysqli_query($connect_database, $sql);
 			if (!$result) {

@@ -27,13 +27,15 @@ if ($_SESSION['signed_in'] == false | $_SESSION['user_level'] != 1) {
         $number    = preg_match('@[0-9]@', $_POST['user_pass']);
         $specialChars = preg_match('@[^\w]@', $_POST['user_pass']);
 
-        if (!$uppercase || !$lowercase || !$number || !$specialChars || strlen($password) < 8) {
+        
+
+        if (!$uppercase && !$lowercase && !$number && !$specialChars && strlen($password) < 8) {
             echo '<br><font style="font-size: 18px;">Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.</font><br><br>';
         } else {
             $errors = array(); /* declare the array for later use */
 
             if (isset($_POST['user_name'])) {
-                //the user name exists
+                //the user name existsm 
                 if (!ctype_alnum($_POST['user_name'])) {
                     $errors[] = '<br><font style="font-size: 18px;">The username can only contain letters and digits.</font><br><br>';
                 }
@@ -74,13 +76,19 @@ if ($_SESSION['signed_in'] == false | $_SESSION['user_level'] != 1) {
                 }
                 echo '</ul>';
             } else {
+
+                //$sql = "INSERT INTO
+                        //users(user_name, user_pass, user_email ,user_date, user_level)
+                    //VALUES('" . $_POST['user_name'] . "', '" . hash('sha256', $_POST['user_pass']) . "', '" . $_POST['user_email'] . "', NOW(), 1)";
+                    
+                $hashed_pwd = password_hash($_POST['user_pass'], PASSWORD_DEFAULT);
                 $sql = "INSERT INTO
-                        users(user_name, user_pass, user_email ,user_date, user_level)
-                    VALUES('" . $_POST['user_name'] . "', '" . hash('sha256', $_POST['user_pass']) . "', '" . $_POST['user_email'] . "', NOW(), 1)";
+                            users(user_name, user_pass, user_email ,user_date, user_level)
+                        VALUES('" . $_POST['user_name'] . "', '" . $hashed_pwd . "', '" . $_POST['user_email'] . "', NOW(), 1)";    
 
                 $result = mysqli_query($connect_database, $sql);
                 if (!$result) {
-                    //something went wrong, display the error
+                    //something went wrong, display the error0 
                     echo 'We are unable to register your account. Please try again later.';
                     //echo mysql_error(); //debugging, uncomment when needed
                 } else {
