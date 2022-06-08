@@ -3,11 +3,11 @@
 include 'database.php';
 include 'header.php';
 
-echo '<font style="font-size: 18px;">Create a category</font>';
-if ($_SESSION['signed_in'] == false | $_SESSION['user_level'] != 1) {
+//echo '<font style="font-size: 18px;">Create a category</font>';
+if ($_SESSION['signed_in'] == true || $_SESSION['user_level'] == 0) {
 	//the user is not an admin
 	echo '<br><font style="font-size: 14px;">Sorry, you do not have sufficient rights to access this page.</font><br><br>';
-} else {
+} elseif($_SESSION['signed_in'] == true || $_SESSION['user_level'] == 1){
 	//the user has admin rights
 	if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 		//the form hasn't been posted yet, display it
@@ -34,6 +34,10 @@ if ($_SESSION['signed_in'] == false | $_SESSION['user_level'] != 1) {
 			}
 		}
 	}
+}
+
+else {
+	
 }
 
 include 'footer.php';
