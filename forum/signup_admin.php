@@ -21,7 +21,6 @@ if ($_SESSION['signed_in'] == false | $_SESSION['user_level'] != 1) {
  	 </form>';
     } else {
 
-
         //$uppercase = preg_match('@[A-Z]@', $_POST['user_pass']);
         //$lowercase = preg_match('@[a-z]@', $_POST['user_pass']);
         //$number    = preg_match('@[0-9]@', $_POST['user_pass']);

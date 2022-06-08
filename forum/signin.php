@@ -1,4 +1,4 @@
-<?php
+=<?php
 //signin.php
 include 'database.php';
 include 'header.php';
