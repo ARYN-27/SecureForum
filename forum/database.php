@@ -10,3 +10,7 @@ if(!mysqli_connect($server, $username, $password))
 }
 
 $conn = new PDO("mysql:host=localhost;dbname=forum_v2", 'genesis', 'genesis');
+
+//mysqli_report(MYSQLI_REPORT_ALL ^ MYSQLI_REPORT_INDEX);
+
+?>

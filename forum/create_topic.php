@@ -94,6 +94,7 @@ if ($_SESSION['signed_in'] == false) {
 									  " . $topicid . ",
 									  " . $_SESSION['user_id'] . "
 								)";
+								
 				$result = mysqli_query($connect_database, $sql);
 
 				if (!$result) {

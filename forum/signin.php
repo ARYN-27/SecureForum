@@ -20,26 +20,26 @@ if (isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true) {
 			<div class="h-captcha" data-sitekey="10000000-ffff-ffff-ffff-000000000001" data-theme="dark"></div> 
 			<input id="item" type="submit" value="sign in" class="login-text" name="buttonLogin"></input>
 		 </form>';
-		
 	} else {
-		if (isset($_POST['h-captcha-response']) && !empty($_POST['h-captcha-response'])) {
-			if (isset($_POST['buttonLogin'])) {
+		if (isset($_POST['buttonLogin'])) {
+			if (isset($_POST['h-captcha-response']) && !empty($_POST['h-captcha-response'])) {
+
 				$stmt = $conn->prepare('select * from users where user_name = :user_name');
 				$stmt->bindValue('user_name', $_POST['user_name']);
-	
+				//$stmt->bindValue('user_level',$_POST['user_level']);
+
 				try {
 					$stmt->execute();
 					$users = $stmt->fetch(PDO::FETCH_OBJ);
 					if ($users != NULL) {
 						if (password_verify($_POST['user_pass'], $users->user_pass)) {
 							$_SESSION['signed_in'] = true;
-	
-							//header('location:index.php');
-	
-	
 							$_SESSION['user_name'] = $_POST['user_name'];
-							//$_SESSION['user_level'] = $_POST['user_level'];
-	
+							$_SESSION['user_level'] = $users->user_level;
+							$_SESSION['user_id'] = $users->user_id;
+
+
+
 							echo '<br><font style="font-size: 18px;">Welcome, ' . $_SESSION['user_name'] . '. <br /><a href="index.php">Proceed to the forum overview</a>.</font><br><br>';
 						} elseif (!password_verify($_POST['user_pass'], $users->user_pass)) {
 							$error = 'Account Invalid';
@@ -52,9 +52,11 @@ if (isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true) {
 				} catch (exception $e) {
 					echo 'You are unable to login to the account.';
 				}
+			} else {
+				echo 'Something went wrong while hCaptcha Validation. Please try again.';
 			}
-		}else {
-			echo'"Something went wrong while hCaptcha Validation. Please try again after sometime."';
+		} else {
+			echo 'Something went wrong .';
 		}
 	}
 }

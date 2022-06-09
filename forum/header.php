@@ -35,11 +35,14 @@
 						<?php
 						if (isset($_SESSION['signed_in']) and $_SESSION['signed_in'] == True) {
 							echo '<a id="item" href="create_topic.php">create topic</a>  ';
-							echo '<a id="item" href="create_cat.php">create category</a>';
+							
+
 							if ($_SESSION['user_level'] == 1) { //Display admin register form when admin logged in
-								echo '<a id="item" href="signup_admin.php">register admin account</a>';
+								echo '<a id="item" href="create_cat.php">create category</a>';
+								echo'<a id="item" href="signup_admin.php">register admin account</a>';
+								
 							}else{
-								echo'';
+								//echo '';
 							}
 						} else {
 						}
