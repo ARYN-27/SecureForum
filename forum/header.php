@@ -12,7 +12,7 @@
 
 <body>
 
-	<!--<div class="page-border">-->
+	<div class="page-border">
 
 		<div class="intro-box">
 

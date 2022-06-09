@@ -65,6 +65,8 @@ if ($_SESSION['signed_in'] == false) {
 								   )";
 
 			$result = mysqli_query($connect_database, $sql);
+
+			
 			if (!$result) {
 				//something went wrong, display the error
 				echo '<br><font style="font-size: 14px;">An error occured while inserting your data. Please try again later.</font><br><font style="font-size: 14px;">' . '</font><br>';
