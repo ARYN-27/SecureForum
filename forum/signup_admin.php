@@ -100,10 +100,10 @@ echo '<font style="font-size: 36px;font-family: \'Major Mono Display\'; font-wei
     }
 */
 
-if ($_SESSION['signed_in'] == true || $_SESSION['user_level'] == 0) {
+if ($_SESSION['signed_in'] == true && $_SESSION['user_level'] != 1) {
     //the user is not an admin
     echo '<br><font style="font-size: 14px;">Sorry, you do not have sufficient rights to access this page.</font><br><br>';
-} elseif ($_SESSION['signed_in'] == true || $_SESSION['user_level'] == 1) {
+} else {
     if ($_SERVER['REQUEST_METHOD'] != 'POST') {
         $errors = array();
 
@@ -138,17 +138,17 @@ if ($_SESSION['signed_in'] == true || $_SESSION['user_level'] == 0) {
 
                 //password check
                 if (isset($_POST['user_pass'])) {
-                    /*
+                    
                         if ($_POST['password'] != $_POST['password_check']) {
                             $errors[] = '<br><font style="font-size: 18px;">The two passwords did not match.</font><br><br>';
                         }
-                    */
+                    
                 } else {
                     $errors[] = '<br><font style="font-size: 18px;">The password field cannot be empty.</font><br><br>';
                 }
 
                 //email validation
-                /*
+                
                     if (isset($_POST['user_email'])) {
                         if (!filter_var($_POST['user_email'], FILTER_SANITIZE_EMAIL)) { //email sanitization
                             if (!filter_var($_POST['user_email'], FILTER_VALIDATE_EMAIL)) {  //email validation  //HTML Required is acting as the first gate
@@ -160,7 +160,7 @@ if ($_SESSION['signed_in'] == true || $_SESSION['user_level'] == 0) {
                     } else {
                         $errors[] = '<br><font style="font-size: 18px;">This email field cannot be empty.</font><br><br>';
                     }
-                */
+                
 
                 if (!empty($errors)) /*check for an empty array, if there are errors, they're in this array (note the ! operator)*/ {
                     echo '<br><font style="font-size: 18px;">Uh-oh.. a couple of fields are not filled in correctly..</font><br><br>';
@@ -175,10 +175,11 @@ if ($_SESSION['signed_in'] == true || $_SESSION['user_level'] == 0) {
                 } else {
                     //userlevel testing; admin access == 1
                     //$userlevel = 1;
+                    //PARAMETERIZED QUERY
                     $stmt = $conn->prepare('insert into users(user_name, user_pass,user_email, user_level) values(:user_name, :user_pass, :user_email, 1)');
                     $stmt->bindValue('user_name', $_POST['user_name']);
                     $stmt->bindValue('user_email', $_POST['user_email']);
-                    $stmt->bindValue('user_pass', password_hash($_POST['user_pass'], PASSWORD_BCRYPT));
+                    $stmt->bindValue('user_pass', password_hash($_POST['user_pass'], PASSWORD_BCRYPT)); //PASSWORD HASHING WITH SALT USING BCRYPT
                     //$stmt->bindValue('fullName', $_POST['fullName']);
                     //$status=$stmt->execute();
 
@@ -202,13 +203,10 @@ if ($_SESSION['signed_in'] == true || $_SESSION['user_level'] == 0) {
                     //insert PDO here
 
 
-
                 }
             }
         }
     }
-} else {
-    # code...
 }
 
 
@@ -216,26 +214,3 @@ if ($_SESSION['signed_in'] == true || $_SESSION['user_level'] == 0) {
 include 'footer.php';
 //mysqli_close($connect_database);
 ?>
-
-<!--<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-
-<body>
-    <font style="font-size: 36px;font-family: 'Major Mono Display'; font-weight:600;">sign up</font><br><br>
-    <form method="post" action="">
-
-        <font style="font-size: 18px;">Username: </font><input type="text" name="user_name" style="border: 2px solid black;"></input><br><br>
-        <font style="font-size: 18px;">Password: </font><input type="password" name="user_pass" style="border: 2px solid black;"></input><br><br>
-        <font style="font-size: 18px;">Confirm your Password: </font><input type="password" name="user_pass_check" style="border: 2px solid black;"></input><br><br>
-        <font style="font-size: 18px;">E-mail: </font><input type="email" name="user_email" style="border: 2px solid black;"></input><br><br>
-        <input type="submit" value="join here" id="item"></input>
-    </form>
-</body>
-
-</html>-->

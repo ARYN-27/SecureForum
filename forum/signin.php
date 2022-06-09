@@ -5,78 +5,7 @@ include 'header.php';
 
 echo '<font style="font-size: 36px;font-family: \'Major Mono Display\'; font-weight:600;">sign in</font><br><br>';
 
-/*
-	if (isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true) {
-		echo '<br><font style="font-size: 18px;">You are already signed in.</font><br><br>';
-	} else {
-		if ($_SERVER['REQUEST_METHOD'] != 'POST') {
-	
-			
-				echo '<form method="post" action="">
-					<font style="font-size: 18px;">Username: </font><input type="text" name="user_name"></input><br><br>
-					<font style="font-size: 18px;">Password: </font><input type="password" name="user_pass"></input><br><br>
-					<input id="item" type="submit" value="sign in" class="login-text"></input>
-				 </form>';
-			
-		} else {
-			//so, the form has been posted, we'll process the data in three ///steps:
-			//	1.	Check the data
-			//	2.	Let the user refill the wrong fields (if necessary)
-			//	3.	Varify if the data is correct and return the correct response
-			//
-			$errors = array();
-			if (!isset($_POST['user_name'])) {
-				$errors[] = '<br><font style="font-size: 18px;">The username field must not be empty.</font><br><br>';
-			}
-	
-			if (!isset($_POST['user_pass'])) {
-				$errors[] = '<br><font style="font-size: 18px;">The password field must not be empty.</font><br><br>';
-			}
-	
-			if (!empty($errors)) {
-				echo '<br><font style="font-size: 18px;">fields are not filled in correctly..</font><br><br>';
-				echo '<ul>';
-				foreach ($errors as $key => $value) {
-					echo '<li>' . $value . '</li>';
-				}
-				echo '</ul>';
-			} else {
-	
-				$sql = "SELECT 
-							user_id,
-							user_name,
-							user_level
-						FROM
-							users
-						WHERE
-							user_name = '" . $_POST['user_name'] . "'
-						AND
-							user_pass = '" . password_verify($_POST['user_pass'], $user_pass) . "'";
-	
-				$result = mysqli_query($connect_database, $sql);
-				if (!$result) {
-					echo '<br><font style="font-size: 18px;">Something went wrong while signing in. Please try again later.</font><br><br>';
-				} else {
-					if (mysqli_num_rows($result) == 0) {
-						echo '<br><font style="font-size: 18px;">You have supplied a wrong user/password combination. Please try again.</font><br><br>';
-					} else {
-	
-						$_SESSION['signed_in'] = true;
-	
-	
-						while ($row = mysqli_fetch_assoc($result)) {
-							$_SESSION['user_id'] 	= $row['user_id'];
-							$_SESSION['user_name'] 	= $row['user_name'];
-							$_SESSION['user_level'] = $row['user_level'];
-						}
-	
-						echo '<br><font style="font-size: 18px;">Welcome, ' . $_SESSION['user_name'] . '. <br /><a href="index.php">Proceed to the forum overview</a>.</font><br><br>';
-					}
-				}
-			}
-		}
-	}
-*/
+
 //new PDO execution
 if (isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true) {
 	echo '<br><font style="font-size: 18px;">You are already signed in.</font><br><br>';
@@ -88,61 +17,44 @@ if (isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true) {
 		echo '<form method="post" action="">
 			<font style="font-size: 18px;">Username: </font><input type="text" name="user_name"></input><br><br>
 			<font style="font-size: 18px;">Password: </font><input type="password" name="user_pass"></input><br><br>
+			<div class="h-captcha" data-sitekey="10000000-ffff-ffff-ffff-000000000001" data-theme="dark"></div> 
 			<input id="item" type="submit" value="sign in" class="login-text" name="buttonLogin"></input>
 		 </form>';
+		
 	} else {
-		if (isset($_POST['buttonLogin'])) {
-			$stmt = $conn->prepare('select * from users where user_name = :user_name');
-			$stmt->bindValue('user_name', $_POST['user_name']);
-			//$stmt->execute();
-			//$users = $stmt->fetch(PDO::FETCH_OBJ);
-
-
-			/**if ($users != NULL) {
-				if (password_verify($_POST['user_pass'], $users->user_pass)) {
-					$_SESSION['signed_in'] = true;
-					//$_SESSION['user_name'] = $_POST['user_name'];
-					//header('location:index.php');
-
-					$_SESSION['user_name'] = $_POST['user_name'];
-
-					echo '<br><font style="font-size: 18px;">Welcome, ' . $_SESSION['user_name'] . '. <br /><a href="index.php">Proceed to the forum overview</a>.</font><br><br>';
-
-
-				} elseif (!password_verify($_POST['user_pass'], $users->user_pass)) {
-					echo 'Account Invalid';
-				} else {
-					//$error = 'Account Invalid';
-					echo 'Account Invalid';
-				}
-			} else {
-				$error = 'Account Invalid';
-			}*/
-
-			try {
-				$stmt->execute();
-				$users = $stmt->fetch(PDO::FETCH_OBJ);
-				if ($users != NULL) {
-					if (password_verify($_POST['user_pass'], $users->user_pass)) {
-						$_SESSION['signed_in'] = true;
-
-						//header('location:index.php');
-
-
-						$_SESSION['user_name'] = $_POST['user_name'];
-
-						echo '<br><font style="font-size: 18px;">Welcome, ' . $_SESSION['user_name'] . '. <br /><a href="index.php">Proceed to the forum overview</a>.</font><br><br>';
-					} elseif (!password_verify($_POST['user_pass'], $users->user_pass)) {
+		if (isset($_POST['h-captcha-response']) && !empty($_POST['h-captcha-response'])) {
+			if (isset($_POST['buttonLogin'])) {
+				$stmt = $conn->prepare('select * from users where user_name = :user_name');
+				$stmt->bindValue('user_name', $_POST['user_name']);
+	
+				try {
+					$stmt->execute();
+					$users = $stmt->fetch(PDO::FETCH_OBJ);
+					if ($users != NULL) {
+						if (password_verify($_POST['user_pass'], $users->user_pass)) {
+							$_SESSION['signed_in'] = true;
+	
+							//header('location:index.php');
+	
+	
+							$_SESSION['user_name'] = $_POST['user_name'];
+							//$_SESSION['user_level'] = $_POST['user_level'];
+	
+							echo '<br><font style="font-size: 18px;">Welcome, ' . $_SESSION['user_name'] . '. <br /><a href="index.php">Proceed to the forum overview</a>.</font><br><br>';
+						} elseif (!password_verify($_POST['user_pass'], $users->user_pass)) {
+							$error = 'Account Invalid';
+							echo 'Account Invalid';
+						}
+					} else {
 						$error = 'Account Invalid';
 						echo 'Account Invalid';
 					}
-				} else {
-					$error = 'Account Invalid';
-					echo 'Account Invalid';
+				} catch (exception $e) {
+					echo 'You are unable to login to the account.';
 				}
-			} catch (exception $e) {
-				echo 'You are unable to login to the account.';
 			}
+		}else {
+			echo'"Something went wrong while hCaptcha Validation. Please try again after sometime."';
 		}
 	}
 }
@@ -150,13 +62,25 @@ if (isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true) {
 
 include 'footer.php';
 //mysqli_close($connect_database);
+
 ?>
 
-<!--<body>
-	<form method="post" action="">
-		<font style="font-size: 18px;">Username: </font><input type="text" name="user_name"></input><br><br>
-		<font style="font-size: 18px;">Password: </font><input type="password" name="user_pass"></input><br><br>
-		<input id="item" type="submit" value="sign in" class="login-text" name="buttonLogin"></input>
-	</form>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+	<script tyoe="text/JavaScript">
+		var refreshButton = document.querySelector(".refresh-captcha");
+		refreshButton.onclick = function() {
+			document.querySelector(".captcha-image").src = 'captcha.php?' + Date.now();
+		}
+	</script>
 </body>
--->
+
+</html>

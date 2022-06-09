@@ -73,21 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 			}
 			echo '</ul>';
 		} else {
-			//the form has been posted without, so save it
-			//notice the use of mysql_real_escape_string, keep everything safe!
-			//also notice the sha1 function which hashes the password
-			/**$sql = "INSERT INTO
-					users(user_name, user_pass, user_email ,user_date, user_level)
-				VALUES('" . $_POST['user_name'] . "', '" . hash('sha256', $_POST['user_pass']) . "', '" . $_POST['user_email'] . "', NOW(), 0)";
-
-			$result = mysqli_query($connect_database, $sql);
-			if (!$result) {
-				
-				echo 'We are unable to register your account. Please try again later.';
-				//echo mysql_error(); 
-			} else {
-				echo '<br><font style="font-size: 18px;">Succesfully registered. You can now <a href="signin.php">sign in</a> and start posting! :-)</font><br><br>';
-			}*/
+			
 
 			$stmt = $conn->prepare('insert into users(user_name, user_pass,user_email, user_level) values(:user_name, :user_pass, :user_email, 0)');
 			$stmt->bindValue('user_name', $_POST['user_name']);
