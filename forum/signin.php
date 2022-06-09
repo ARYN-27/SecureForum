@@ -33,14 +33,15 @@ if (isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true) {
 					$users = $stmt->fetch(PDO::FETCH_OBJ);
 					if ($users != NULL) {
 						if (password_verify($_POST['user_pass'], $users->user_pass)) {
+
 							$_SESSION['signed_in'] = true;
 							$_SESSION['user_name'] = $_POST['user_name'];
 							$_SESSION['user_level'] = $users->user_level;
 							$_SESSION['user_id'] = $users->user_id;
 
 
-
 							echo '<br><font style="font-size: 18px;">Welcome, ' . $_SESSION['user_name'] . '. <br /><a href="index.php">Proceed to the forum overview</a>.</font><br><br>';
+
 						} elseif (!password_verify($_POST['user_pass'], $users->user_pass)) {
 							$error = 'Account Invalid';
 							echo 'Account Invalid';
