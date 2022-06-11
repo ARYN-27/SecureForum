@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 18, 2022 at 08:35 PM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 8.0.11
+-- Generation Time: Jun 09, 2022 at 02:40 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -39,7 +39,8 @@ CREATE TABLE `categories` (
 
 INSERT INTO `categories` (`cat_id`, `cat_name`, `cat_description`) VALUES
 (1, 'CSS', 'Discussion on CSS'),
-(2, 'HTML', 'HTML Test');
+(2, 'HTML', 'HTML Test'),
+(7, 'Web Security', 'All about Web Security');
 
 -- --------------------------------------------------------
 
@@ -116,7 +117,14 @@ INSERT INTO `users` (`user_id`, `user_name`, `user_pass`, `user_email`, `user_da
 (7, 'test4', 'a4e624d686e03ed2767c0abd85c14426b0b1157d2ce81d27bb4fe4f6f01d688a', 'test4@gmail.com', '2022-01-18 16:38:14', 0),
 (8, 'admin2', '1c142b2d01aa34e9a36bde480645a57fd69e14155dacfab5a3f9257b77fdc8d8', 'admin2@gmail.com', '2022-01-18 16:39:51', 1),
 (16, 'test6', 'ed0cb90bdfa4f93981a7d03cff99213a86aa96a6cbcf89ec5e8889871f088727', 'test6@gmail.com', '2022-01-18 23:15:46', 0),
-(17, 'admin3', '4fc2b5673a201ad9b1fc03dcb346e1baad44351daa0503d5534b4dfdcc4332e0', 'admin3@gmail.com', '2022-01-18 23:36:38', 1);
+(17, 'admin3', '4fc2b5673a201ad9b1fc03dcb346e1baad44351daa0503d5534b4dfdcc4332e0', 'admin3@gmail.com', '2022-01-18 23:36:38', 1),
+(22, 'admin5', '$2y$10$Izf0zTlppXdbiHR9XtaRTe2TfYvixABMxdZAoPb2pTTYHv/baOIcq', 'admin5@email.com', '2022-06-08 15:51:22', 1),
+(25, 'admin6', '$2y$10$/CQYNC0SfA6cNZ51kGQ4DOgcIK9ISGAM3qORLqKDPRYfAoVEtmXbu', 'admin6@email.com', '2022-06-08 16:07:05', 1),
+(29, 'admin7', '$2y$10$1EP93/U4IIqYsKUQmL2F3O8QdTBWp55cvWbf3CZw0vxLVozdC.NPy', 'admin7@email.com', '2022-06-08 17:57:36', 1),
+(30, 'admin8', '$2y$10$UTeyDM2nVAGgm0Y35ui8EuTdtVmS1C2QVlEmgnbifvoqo0veakf8e', 'admin8@email.com', '0000-00-00 00:00:00', 1),
+(42, 'admin9', '$2y$10$P4puIuNf2exPJ2gjZkm5UexmWkheMNPl0RTA5n6/W4mBfhUNHcrRC', 'admin9@email.com', '0000-00-00 00:00:00', 1),
+(45, 'admin10', '$2y$10$w3dTWTQqyGI.2CfEWbeNaO6vKe3FbZ8H5INMsG6FiA4/Mzsz/SWqK', 'admin10@email.com', '0000-00-00 00:00:00', 1),
+(47, 'user1', '$2y$10$lqwDfUyHJCe2q3DWCH1m/OfQx1woprzPjYvBvEYboyb2ayBZTQLvK', 'user1@email.com', '0000-00-00 00:00:00', 0);
 
 --
 -- Indexes for dumped tables
@@ -163,7 +171,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `cat_id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `cat_id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `posts`
@@ -181,7 +189,7 @@ ALTER TABLE `topics`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `user_id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- Constraints for dumped tables

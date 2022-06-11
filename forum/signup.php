@@ -19,10 +19,12 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 } else {
 	if (isset($_POST['h-captcha-response']) && !empty($_POST['h-captcha-response'])) {
 		// Validate password strength
-		$uppercase = preg_match('@[A-Z]@', $_POST['user_pass']);
-		$lowercase = preg_match('@[a-z]@', $_POST['user_pass']);
-		$number    = preg_match('@[0-9]@', $_POST['user_pass']);
-		$specialChars = preg_match('@[^\w]@', $_POST['user_pass']);
+		/*
+			$uppercase = preg_match('@[A-Z]@', $_POST['user_pass']);
+			$lowercase = preg_match('@[a-z]@', $_POST['user_pass']);
+			$number    = preg_match('@[0-9]@', $_POST['user_pass']);
+			$specialChars = preg_match('@[^\w]@', $_POST['user_pass']);
+		*/
 
 		if (!preg_match("#.*^(?=.{8,20})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).*$#", $_POST['user_pass'])) {
 			echo '<br><font style="font-size: 18px;">Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.</font><br><br>';
