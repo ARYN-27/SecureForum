@@ -21,7 +21,7 @@ if ($_SESSION['signed_in'] == true || $_SESSION['user_level'] == 1) {
 			$sql = "INSERT INTO categories(cat_name, cat_description)
 		   VALUES('" . addslashes($_POST['cat_name']) . "',
 				 '" . addslashes($_POST['cat_description']) . "')";
-			$result = mysqli_query($connect_database, $sql);
+			 
 			if (!$result) {
 				//something went wrong, display the error
 				
