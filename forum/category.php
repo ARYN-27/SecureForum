@@ -87,4 +87,3 @@ else
 
 include 'footer.php';
 mysqli_close($connect_database);
-?>
