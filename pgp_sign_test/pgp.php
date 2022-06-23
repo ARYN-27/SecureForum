@@ -1,3 +1,0 @@
-<?php
-$gpg = new gnupg();
-?>
