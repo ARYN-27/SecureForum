@@ -78,6 +78,7 @@ else
 				echo '<tr><td colspan="2"><font style="font-size: 18px;">Reply:</font><br>';
 			    echo '<form method="post" action="reply.php?id=' . $row['topic_id'] . '">';
 				echo '<textarea style="resize:none;" name="reply-content" rows="10" cols="70" wrap="pyhsical"></textarea><br /><br />';
+				echo '<font style="font-size: 18px;">Enter your special code: </font><input type="password" name="user_code" style="border: 2px solid black;"></input><br><br>';
 				echo '<input type="submit" value="submit reply" id="item"/>';
 				echo '</form></td></tr>';
 			}
@@ -90,4 +91,3 @@ else
 
 include 'footer.php';
 mysqli_close($connect_database);
-?>
