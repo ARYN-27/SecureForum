@@ -7,7 +7,6 @@ html {
   font-family: "Open Sans;", sans-serif;
 }
 
-
 .navi-home {
   transition: all 0.3s;
   touch-action: manipulation;
@@ -21,7 +20,19 @@ html {
 /* BEGIN BASIC FORUM STYLES */
 body {
   text-align: center;
-  background-color: #ffffff; 
+  /**
+    background-color: #ffffff;
+  */
+  /**
+    border: 15px solid;
+    border-image: linear-gradient(118deg, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%) 1;
+  */
+
+  /**
+    background-image: url("../image/blurry-gradient-haikei.svg");
+  */
+
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%237b3956' fill-opacity='0.08'%3E%3Cpath d='M0 38.59l2.83-2.83 1.41 1.41L1.41 40H0v-1.41zM0 1.4l2.83 2.83 1.41-1.41L1.41 0H0v1.41zM38.59 40l-2.83-2.83 1.41-1.41L40 38.59V40h-1.41zM40 1.41l-2.83 2.83-1.41-1.41L38.59 0H40v1.41zM20 18.6l2.83-2.83 1.41 1.41L21.41 20l2.83 2.83-1.41 1.41L20 21.41l-2.83 2.83-1.41-1.41L18.59 20l-2.83-2.83 1.41-1.41L20 18.59z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 
 .intro-box {
@@ -53,8 +64,8 @@ body {
   color: black;
   font-size: 32px;
 }
-#wrapper {
 
+#wrapper {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -75,7 +86,6 @@ body {
   text-align: left;
   height: 83vh;
 }
-
 
 #menu {
   background-color: #f1f3f1;
@@ -157,19 +167,21 @@ body {
   clear: both;
 }
 
-.page-border {
-  position: absolute;
-  top: 0;
-  left: 0;
-  border: 15px solid;
-  width: 100%;
-  height: 100vh;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  border-image: linear-gradient(118deg, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%) 1;
-}
-
+/**
+  .page-border {
+    position: absolute;
+    top: 0;
+    overflow: auto;
+    border: 15px solid;
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border-image: linear-gradient(118deg, #eeaeca 0%, #94bbe9 100%) 1;
+  }
+  
+*/
 /* begin table styles */
 table {
   border-collapse: collapse;
@@ -187,7 +199,7 @@ table a:hover {
 }
 
 th {
-  background-color: #89023E;
+  background-color: #89023e;
   color: #ffffff;
   font-family: "Source Code Pro";
   padding-top: 11px;
@@ -217,7 +229,6 @@ font {
   font-weight: 500;
   font-size: 20px;
 }
-
 
 /* item */
 #item {
@@ -319,7 +330,6 @@ font {
   }
 }
 
-
 .login-text {
   border: 2px solid #171e29;
 }
@@ -344,6 +354,7 @@ font {
   font-size: 75%;
   color: #373737;
 }
+
 #footer {
   font-size: 65%;
   padding: 3px 0 0 0;
@@ -362,4 +373,3 @@ font {
   font-family: "Major Mono Display", monospace;
   font-size: 14px;
 }
-
