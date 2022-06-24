@@ -13,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
  		<font style="font-size: 18px;">Password: </font><input type="password" name="user_pass" style="border: 2px solid black;"></input><br><br>
 		<font style="font-size: 18px;">Confirm your Password: </font><input type="password" name="user_pass_check" style="border: 2px solid black;"></input><br><br>
 		<font style="font-size: 18px;">E-mail: </font><input type="email" name="user_email" style="border: 2px solid black;"></input><br><br>
+		<font style="font-size: 18px;">Enter your special code: </font><input type="password" name="user_code" style="border: 2px solid black;"></input><br><br>
 		<div class="h-captcha" data-sitekey="10000000-ffff-ffff-ffff-000000000001" data-theme="dark"></div> 
  		<input type="submit" value="join here" id="item"></input>
  	 </form>';
@@ -68,42 +69,49 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 				$errors[] = '<br><font style="font-size: 18px;">This email field cannot be empty.</font><br><br>';
 			}
 
-			//empty input invalidation
-			if (!empty($errors)) /*check for an empty array, if there are errors, they're in this array (note the ! operator)*/ {
-				echo '<br><font style="font-size: 18px;">Uh-oh.. a couple of fields are not filled in correctly..</font><br><br>';
-				echo '<ul>';
-				foreach ($errors as $key => $value) /* walk through the array so all the errors get displayed */ {
-					echo '<li>' . $value . '</li>'; /* this generates a nice error list */
-				}
-				echo '</ul>';
+			//user_code validation
+			$user_code_length = strlen($_POST['user_code']);
+
+			if ($user_code_length > 3 || $user_code_length < 3) {
+				echo '<br><font style="font-size: 18px;">Your special code must be 3 characters.</font><br><br>';
 			} else {
-
-
-				$stmt = $conn->prepare('insert into users(user_name, user_pass,user_email, user_level) values(:user_name, :user_pass, :user_email, 0)');
-				$stmt->bindValue('user_name', $_POST['user_name']);
-				$stmt->bindValue('user_email', $_POST['user_email']);
-				$stmt->bindValue('user_pass', password_hash($_POST['user_pass'], PASSWORD_BCRYPT));
-				//$stmt->bindValue('fullName', $_POST['fullName']);
-				//$status=$stmt->execute();
-
-				try {
-					$status = $stmt->execute();
-
-					if (!$status) {
-						//something went wrong, display the error0 
-						//echo 'We are unable to register your account. Please try again later.';
-						//echo mysql_error(); //debugging, uncomment when needed
-					} else {
-						//catch test
-
-						echo '<br><font style="font-size: 18px;">Succesfully registered. You can now <a href="signin.php">sign in</a> and start posting! :-)</font><br><br>';
+				//empty input invalidation
+				if (!empty($errors)) /*check for an empty array, if there are errors, they're in this array (note the ! operator)*/ {
+					echo '<br><font style="font-size: 18px;">Uh-oh.. a couple of fields are not filled in correctly..</font><br><br>';
+					echo '<ul>';
+					foreach ($errors as $key => $value) /* walk through the array so all the errors get displayed */ {
+						echo '<li>' . $value . '</li>'; /* this generates a nice error list */
 					}
-				} catch (exception $e) {
-					echo 'We are unable to register your account. Please try again later.';
+					echo '</ul>';
+				} else {
+
+
+					$stmt = $conn->prepare('insert into users(user_name, user_pass,user_email, user_level, user_code) values(:user_name, :user_pass, :user_email, 0, :user_code)');
+					$stmt->bindValue('user_name', $_POST['user_name']);
+					$stmt->bindValue('user_email', $_POST['user_email']);
+					$stmt->bindValue('user_pass', password_hash($_POST['user_pass'], PASSWORD_BCRYPT));
+					$stmt->bindValue('user_code', hash('sha256', $_POST['user_code']));
+					//$status=$stmt->execute();
+
+					try {
+						$status = $stmt->execute();
+
+						if (!$status) {
+							//something went wrong, display the error0 
+							//echo 'We are unable to register your account. Please try again later.';
+							//echo mysql_error(); //debugging, uncomment when needed
+						} else {
+							//catch test
+
+							echo '<br><font style="font-size: 18px;">Succesfully registered. You can now <a href="signin.php">sign in</a> and start posting! :-)</font><br><br>';
+						}
+					} catch (exception $e) {
+						echo 'We are unable to register your account. Please try again later.';
+					}
 				}
 			}
 		}
-	} 
+	}
 }
 
 include 'footer.php';

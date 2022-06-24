@@ -44,16 +44,35 @@ if ($_SESSION['signed_in'] == false) {
 				}
 				echo '</select><br><br>';
 
-				echo '<font style="font-size: 14px;">Message: </font><br><textarea style="resize:none;" name="post_content" rows="10" cols="70" wrap="hard"></textarea><br /><br />
-					<input type="submit" value="create topic" id="item" />
+				echo '<font style="font-size: 14px;">Message: </font><br><textarea style="resize:none;" name="post_content" rows="10" cols="70" wrap="hard"></textarea><br /><br />';
+				echo '<font style="font-size: 18px;">Enter your special code: </font><input type="password" name="user_code" style="border: 2px solid black;"></input><br><br>';
+				echo '<input type="submit" value="create topic" id="item" />
 				 </form>';
+
+				//echo '';
 			}
 		}
 	} else {
 		if (empty($_POST['topic_subject']) || empty($_POST['post_content'])) {
 			echo '<br><font style="font-size: 14px;">Topic Subject/Post Content cannot be empty ' . '</font><br><br>';
 		} else {
-			$sql = "INSERT INTO 
+			$query = "SELECT 
+						user_code
+					FROM
+						users
+					WHERE
+						user_id = '" . $_SESSION['user_id'] . "'
+					AND
+						user_code = '" . hash('sha256', $_POST['user_code']) . "'";
+
+			$pass_check = mysqli_query($connect_database, $query);
+			$row = mysqli_fetch_array($pass_check);
+			$user_code_check = hash('sha256', $_POST['user_code']);
+			//$passcode_check=mysqli_fetch_assoc($pass_check);
+			//echo $pass_check; 
+			if ($row['user_code'] == $user_code_check) {
+
+				$sql = "INSERT INTO 
 							topics(topic_subject,
 								   topic_date,
 								   topic_cat,
@@ -64,47 +83,53 @@ if ($_SESSION['signed_in'] == false) {
 								   " . $_SESSION['user_id'] . "
 								   )";
 
-			$result = mysqli_query($connect_database, $sql);
-
-			
-			if (!$result) {
-				//something went wrong, display the error
-				echo '<br><font style="font-size: 14px;">An error occured while inserting your data. Please try again later.</font><br><font style="font-size: 14px;">' . '</font><br>';
-			} else {
-				//the first query worked, now start the second, posts query
-				//retrieve the id of the freshly created topic for usage in the posts query
-				$sql = "SELECT	
-								topic_id
-							FROM
-								topics
-							ORDER BY
-								topic_date
-							DESC
-							LIMIT 1";
 				$result = mysqli_query($connect_database, $sql);
-				while ($row = mysqli_fetch_assoc($result)) {
-					$topicid = $row['topic_id'];
-				}
-				$sql = "INSERT INTO
-								posts(post_content,
-									  post_date,
-									  post_topic,
-									  post_by)
-							VALUES
-								('" . addslashes($_POST['post_content']) . "',
-									  NOW(),
-									  " . $topicid . ",
-									  " . $_SESSION['user_id'] . "
-								)";
-				$result = mysqli_query($connect_database, $sql);
-
+				
 				if (!$result) {
 					//something went wrong, display the error
-					echo '<br><font style="font-size: 14px;">An error occured while inserting your post. Please try again later.</font><br><font style="font-size: 14px;">' .  '</font><br>';
+					echo '<br><font style="font-size: 14px;">An error occured while inserting your data. Please try again later.</font><br><font style="font-size: 14px;">' . '</font><br>';
 				} else {
-					//after a lot of work, the query succeeded!
-					echo '<br><font style="font-size: 14px;">You have succesfully created <a href="topic.php?id=' . $topicid . '">your new topic</a>.</font><br><br>';
+					//the first query worked, now start the second, posts query
+					//retrieve the id of the freshly created topic for usage in the posts query
+					$sql = "SELECT	
+									topic_id
+								FROM
+									topics
+								ORDER BY
+									topic_date
+								DESC
+								LIMIT 1";
+					$result = mysqli_query($connect_database, $sql);
+					while ($row = mysqli_fetch_assoc($result)) {
+						$topicid = $row['topic_id'];
+					}
+					$sql = "INSERT INTO
+									posts(post_content,
+										  post_date,
+										  post_topic,
+										  post_by)
+								VALUES
+									('" . addslashes($_POST['post_content']) . "',
+										  NOW(),
+										  " . $topicid . ",
+										  " . $_SESSION['user_id'] . "
+									)";
+					$result = mysqli_query($connect_database, $sql);
+
+					if (!$result) {
+						//something went wrong, display the error
+						echo '<br><font style="font-size: 14px;">An error occured while inserting your post. Please try again later.</font><br><font style="font-size: 14px;">' .  '</font><br>';
+					} else {
+						//after a lot of work, the query succeeded!
+						echo '<br><font style="font-size: 14px;">You have succesfully created <a href="topic.php?id=' . $topicid . '">your new topic</a>.</font><br><br>';
+					}
 				}
+				
+			} else {
+				echo '<br><font style="font-size: 14px;">Wrong Code ⚠</font><br><font style="font-size: 14px;">' . '</font><br>';
+				
+				
+				//echo $user_code_check;
 			}
 		}
 	}
