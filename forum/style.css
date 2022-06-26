@@ -14,7 +14,7 @@ html {
 }
 
 .navi-home:hover {
-  fill: #2afadf;
+  fill: #89023e;
 }
 
 /* BEGIN BASIC FORUM STYLES */
@@ -152,9 +152,14 @@ body {
 }
 
 .logged-user:hover {
-  border-color: #06f;
-  color: #06f;
-  fill: #06f;
+  border-color: #89023e;
+  color: #89023e;
+  fill: #89023e;
+  border: 2px solid #89023e;
+  /**
+    box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px,
+      rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #89023e 0 -3px 0 inset;
+  */
 }
 
 #userbar {
@@ -373,3 +378,5 @@ font {
   font-family: "Major Mono Display", monospace;
   font-size: 14px;
 }
+
+

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 09, 2022 at 02:40 PM
+-- Generation Time: Jun 26, 2022 at 08:37 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -40,7 +40,8 @@ CREATE TABLE `categories` (
 INSERT INTO `categories` (`cat_id`, `cat_name`, `cat_description`) VALUES
 (1, 'CSS', 'Discussion on CSS'),
 (2, 'HTML', 'HTML Test'),
-(7, 'Web Security', 'All about Web Security');
+(7, 'Web Security', 'All about Web Security'),
+(8, 'Crypto', 'All about Cryptography ');
 
 -- --------------------------------------------------------
 
@@ -65,7 +66,12 @@ INSERT INTO `posts` (`post_id`, `post_content`, `post_date`, `post_topic`, `post
 (2, 'HTML Test1', '2022-01-16 09:47:50', 2, 4),
 (3, 'hello', '2022-01-16 09:47:57', 2, 4),
 (4, 'HTML Test1', '2022-01-16 09:49:01', 3, 1),
-(5, 'Hello, admin', '2022-01-16 09:49:31', 3, 4);
+(5, 'Hello, admin', '2022-01-16 09:49:31', 3, 4),
+(7, 'Test10', '2022-06-09 21:28:02', 5, 29),
+(26, 'test1', '2022-06-24 08:20:41', 22, 57),
+(27, 'Reply1', '2022-06-24 17:17:02', 22, 57),
+(28, 'hello,', '2022-06-26 01:05:17', 22, 58),
+(29, 'hello everyone', '2022-06-26 01:05:46', 23, 58);
 
 -- --------------------------------------------------------
 
@@ -88,7 +94,11 @@ CREATE TABLE `topics` (
 INSERT INTO `topics` (`topic_id`, `topic_subject`, `topic_date`, `topic_cat`, `topic_by`) VALUES
 (1, 'CSS Test 1', '2022-01-14 01:34:37', 1, 1),
 (2, 'HTML Test1', '2022-01-16 09:47:50', 1, 4),
-(3, 'HTML Test1', '2022-01-16 09:49:01', 2, 1);
+(3, 'HTML Test1', '2022-01-16 09:49:01', 2, 1),
+(5, 'Test10', '2022-06-09 21:28:02', 1, 29),
+(6, 'Test11', '2022-06-09 21:28:31', 7, 47),
+(22, 'Crypto', '2022-06-24 08:20:41', 7, 57),
+(23, 'cryptotest', '2022-06-26 01:05:46', 8, 58);
 
 -- --------------------------------------------------------
 
@@ -102,29 +112,28 @@ CREATE TABLE `users` (
   `user_pass` varchar(255) NOT NULL,
   `user_email` varchar(255) NOT NULL,
   `user_date` datetime NOT NULL,
-  `user_level` int(8) NOT NULL
+  `user_level` int(8) NOT NULL,
+  `user_code` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `user_name`, `user_pass`, `user_email`, `user_date`, `user_level`) VALUES
-(1, 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 'test@test.com', '2022-01-09 22:12:52', 1),
-(2, 'test2', '109f4b3c50d7b0df729d299bc6f8e9ef9066971f', 'test2@test2.com', '2022-01-14 01:23:11', 0),
-(3, 'test1', 'b444ac06613fc8d63795be9ad0beaf55011936ac', 'test1@gmail.com', '2022-01-14 20:32:03', 0),
-(4, 'test3', '3ebfa301dc59196f18593c45e519287a23297589', 'test3@gmail.com', '2022-01-16 09:44:35', 0),
-(7, 'test4', 'a4e624d686e03ed2767c0abd85c14426b0b1157d2ce81d27bb4fe4f6f01d688a', 'test4@gmail.com', '2022-01-18 16:38:14', 0),
-(8, 'admin2', '1c142b2d01aa34e9a36bde480645a57fd69e14155dacfab5a3f9257b77fdc8d8', 'admin2@gmail.com', '2022-01-18 16:39:51', 1),
-(16, 'test6', 'ed0cb90bdfa4f93981a7d03cff99213a86aa96a6cbcf89ec5e8889871f088727', 'test6@gmail.com', '2022-01-18 23:15:46', 0),
-(17, 'admin3', '4fc2b5673a201ad9b1fc03dcb346e1baad44351daa0503d5534b4dfdcc4332e0', 'admin3@gmail.com', '2022-01-18 23:36:38', 1),
-(22, 'admin5', '$2y$10$Izf0zTlppXdbiHR9XtaRTe2TfYvixABMxdZAoPb2pTTYHv/baOIcq', 'admin5@email.com', '2022-06-08 15:51:22', 1),
-(25, 'admin6', '$2y$10$/CQYNC0SfA6cNZ51kGQ4DOgcIK9ISGAM3qORLqKDPRYfAoVEtmXbu', 'admin6@email.com', '2022-06-08 16:07:05', 1),
-(29, 'admin7', '$2y$10$1EP93/U4IIqYsKUQmL2F3O8QdTBWp55cvWbf3CZw0vxLVozdC.NPy', 'admin7@email.com', '2022-06-08 17:57:36', 1),
-(30, 'admin8', '$2y$10$UTeyDM2nVAGgm0Y35ui8EuTdtVmS1C2QVlEmgnbifvoqo0veakf8e', 'admin8@email.com', '0000-00-00 00:00:00', 1),
-(42, 'admin9', '$2y$10$P4puIuNf2exPJ2gjZkm5UexmWkheMNPl0RTA5n6/W4mBfhUNHcrRC', 'admin9@email.com', '0000-00-00 00:00:00', 1),
-(45, 'admin10', '$2y$10$w3dTWTQqyGI.2CfEWbeNaO6vKe3FbZ8H5INMsG6FiA4/Mzsz/SWqK', 'admin10@email.com', '0000-00-00 00:00:00', 1),
-(47, 'user1', '$2y$10$lqwDfUyHJCe2q3DWCH1m/OfQx1woprzPjYvBvEYboyb2ayBZTQLvK', 'user1@email.com', '0000-00-00 00:00:00', 0);
+INSERT INTO `users` (`user_id`, `user_name`, `user_pass`, `user_email`, `user_date`, `user_level`, `user_code`) VALUES
+(22, 'admin5', '$2y$10$Izf0zTlppXdbiHR9XtaRTe2TfYvixABMxdZAoPb2pTTYHv/baOIcq', 'admin5@email.com', '2022-06-08 15:51:22', 1, 'ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad'),
+(25, 'admin6', '$2y$10$/CQYNC0SfA6cNZ51kGQ4DOgcIK9ISGAM3qORLqKDPRYfAoVEtmXbu', 'admin6@email.com', '2022-06-08 16:07:05', 1, 'ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad'),
+(29, 'admin7', '$2y$10$1EP93/U4IIqYsKUQmL2F3O8QdTBWp55cvWbf3CZw0vxLVozdC.NPy', 'admin7@email.com', '2022-06-08 17:57:36', 1, 'ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad'),
+(30, 'admin8', '$2y$10$UTeyDM2nVAGgm0Y35ui8EuTdtVmS1C2QVlEmgnbifvoqo0veakf8e', 'admin8@email.com', '0000-00-00 00:00:00', 1, 'ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad'),
+(42, 'admin9', '$2y$10$P4puIuNf2exPJ2gjZkm5UexmWkheMNPl0RTA5n6/W4mBfhUNHcrRC', 'admin9@email.com', '0000-00-00 00:00:00', 1, 'ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad'),
+(45, 'admin10', '$2y$10$w3dTWTQqyGI.2CfEWbeNaO6vKe3FbZ8H5INMsG6FiA4/Mzsz/SWqK', 'admin10@email.com', '0000-00-00 00:00:00', 1, 'ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad'),
+(47, 'user1', '$2y$10$lqwDfUyHJCe2q3DWCH1m/OfQx1woprzPjYvBvEYboyb2ayBZTQLvK', 'user1@email.com', '0000-00-00 00:00:00', 0, 'ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad'),
+(51, 'admin11', '$2y$10$2SV2YWLXpQsTwNyeJmf.yOPH6ifXQhyRgQRZfvz/6nTwnSpc3xmCC', 'admin11@test.com', '0000-00-00 00:00:00', 1, 'ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad'),
+(52, 'admin12', '$2y$10$EeaiwNZQy9WMvYgaQ2HZ2.rlE91X9avWjzKOFk91keXJkjLfpKeMS', 'admin12@email.com', '0000-00-00 00:00:00', 1, 'ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad'),
+(53, 'user2', '$2y$10$/5I1UqxJImrTtmm1EWnDpOBf.x5PMIBxFZ0q/jovngtUp0DflJRwy', 'user2@email.com', '0000-00-00 00:00:00', 0, 'ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad'),
+(56, 'user3', '$2y$10$kafWpwIehcEBFl2ciST/.ugFbMLYtQIhJ7KPZz22.JbeLX5H3LZmS', 'user3@email.com', '0000-00-00 00:00:00', 0, 'ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad'),
+(57, 'admin1', '$2y$10$4wO4mm/Dlw7uIetGLbvnO.SkPw.elirPVTpUP0K74vS7rN5l3BOMS', 'admin1@email.com', '0000-00-00 00:00:00', 1, 'ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad'),
+(58, 'crypto', '$2y$10$JfZXUZ7UhRfEYRawMGmO2O3eVbwllcB3A.6C4zQa6pP800jr2qiOe', 'crypto@email.com', '0000-00-00 00:00:00', 0, '58a69b8bb1f5e666c354a4b8753ae06c8e6a59e6c22fafe1d9282b8a95010b32');
 
 --
 -- Indexes for dumped tables
@@ -161,7 +170,8 @@ ALTER TABLE `topics`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`),
   ADD UNIQUE KEY `user_name_unique` (`user_name`),
-  ADD UNIQUE KEY `user_pass` (`user_pass`);
+  ADD UNIQUE KEY `user_pass` (`user_pass`),
+  ADD KEY `user_code` (`user_code`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -171,25 +181,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `cat_id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `cat_id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `post_id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `post_id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `topics`
 --
 ALTER TABLE `topics`
-  MODIFY `topic_id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `topic_id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `user_id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- Constraints for dumped tables

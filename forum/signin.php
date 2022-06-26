@@ -44,7 +44,7 @@ if (isset($_SESSION['signed_in']) && $_SESSION['signed_in'] == true) {
 
 						} elseif (!password_verify($_POST['user_pass'], $users->user_pass)) {
 							$error = 'Account Invalid';
-							echo 'Account Invalid';
+							echo 'Wrong Username/Password';
 						}
 					} else {
 						$error = 'Account Invalid';
